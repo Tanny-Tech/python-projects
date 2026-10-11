@@ -1,5 +1,8 @@
 import openpyxl
 import os
+import emoji
+import pwinput
+import getpass
 
 
 
@@ -7,6 +10,9 @@ import os
 
 from rich.console import Console
 from pyfiglet import figlet_format
+from getpass import getpass 
+from pwinput import pwinput
+
 
 
 console=Console()
@@ -42,27 +48,67 @@ def create_excel_file():
 #------------------------------------------        
 
 def Banner_bank():
+    print(emoji.emojize(":bank:"))
+    print(emoji.emojize(":money_bag:"))
     print(figlet_format("PY BANK"))
     console.print("[blue] Welcome to the PY BANK [/blue]")
     print("1. Create Account\n2. Login\n3. Exit")
-    choice=int(input("\n\nEnter your choice :"))
+
+    choice=(input("\n\nEnter your choice :"))
+
     while True :
+        if choice=="1":
+            CREATE_ACCOUNT()
+            break
             
-        if choice==1:
-            pass
-        elif choice==2:
-            pass
-        elif choice==3:
+        elif choice=="2":
+            print("wait for some more time")
+            break
+            
+        elif choice=="3":
+            break
+        else:
+            print("Enter correct value")
+            Banner_bank()
+
+#-----------------------------CREATE_ACCOUNT-------------------------------
+def CREATE_ACCOUNT():
+    console.print("[bold yellow] CREATE ACCOUNT [/bold yellow]")
+    name=input("Enter your name:").strip()
+    num=input("Enter your ACCOUNT NUMBER:")
+    while True:
+
+        if not num.isdigit():
+            console.print("[bold red] ENTER CORRECT ACCOUNT NUMBER [/bold red]")
+            CREATE_ACCOUNT()
             break
 
+
+        elif num == "exists":
+                pass
+
+        
+        pin=pwinput("Create a 4 Digit pin  : ",mask="*")
+        if not pin.isdigit():
+                console.print("[bold red] Enter DIGIT VALUE [/bold red]")
+                break
+        elif not len(pin) == 4 :
+            console.print("[bold red]    4 DIGIT PIN ONLY    [/bold red]")
+            break
         else:
-            Console.print("[red]Enter correct value")
+            break
 
 
-
-    
- # ----------MAINCODE-------------
-
-                                        
+            
+# ---------------------------MAINCODE----------------------------
+create_excel_file()
 Banner_bank()
+
+
+                               
+# Banner_bank()
+# if __name__ == "__main__":
+
+#     create_excel_file()
+
 

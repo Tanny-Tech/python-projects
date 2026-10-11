@@ -1,2 +1,7 @@
 os
 openpyxl
+pyfiglate
+rich
+emoji
+getpass
+pwinput
